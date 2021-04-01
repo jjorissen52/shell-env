@@ -46,3 +46,5 @@ export colors_lightblue='\033[94m'
 export colors_lightmagenta='\033[95m'
 export colors_lightcyan='\033[96m'
 export colors_white='\033[97m'
+
+export styles_reset="${backgrounds_default}${colors_default}"

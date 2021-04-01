@@ -52,3 +52,9 @@ cache() {
         $@ | tee "$file"
     fi
 }
+
+color() {
+    local color=colors_$1
+    shift
+    echo -e "${!color}$@${styles_reset}"
+}
