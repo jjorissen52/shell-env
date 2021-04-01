@@ -1,7 +1,6 @@
 # load our directory-specific environment files
 # when we change directories
-alias cd="_cd"
-_cd(){
+cd(){
   builtin cd "$@";
   local cdir="$PWD"
   # load custom shell-* files within this directory
