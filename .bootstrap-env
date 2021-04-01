@@ -1,0 +1,31 @@
+export SHELL_ENV_DIRECTORY=${SHELL_ENV_DIRECTORY-~/.config/shell-env}
+
+# unset all currently declared aliases
+unalias -a
+# unset all currently defined functions
+for func in $(declare -F | sed 's/declare -f //'); do
+  unset -f "$func"
+done
+
+load-env() {
+  test -d "$1" || return 1
+
+  # load these in order
+  test -r "$1/.shell-functions" && . "$1/.shell-functions"
+  test -r "$1/.shell-env" && . "$1/.shell-env"
+  test -r "$1/.shell-aliases" && . "$1/.shell-aliases"
+
+  # create bash functions that invoke these shell scripts
+  if [ -d "$1/.shell-scripts" ]; then
+    while IFS= read -r file; do 
+      load-shell-script "$file"
+    done < <(find "$1/.shell-scripts" -maxdepth 1 -type f -exec echo {} \;)
+  fi
+
+  # load any others in unspecified order
+  while IFS= read -r file
+    do . "$1/$file"
+  done < <(grep -vE "aliases|env|functions|scripts" <(find . -name ".shell-*"))
+}
+
+load-env "$SHELL_ENV_DIRECTORY"

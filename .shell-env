@@ -1,0 +1,48 @@
+# do some path stuff
+# export PATH="$HOME/.cargo/bin:$PATH"
+# export PATH="$HOME/go/bin:$PATH"
+# export PATH="$HOME/.nimble/bin:$PATH"
+# export PATH="/usr/local/sbin:$PATH"
+
+# maybe use cache function defined in .shell-functions to speed up 
+# new shell launches
+
+# source `cache brew --prefix nvm`/nvm.sh
+# source `cache brew --prefix autojump`/etc/autojump.sh
+
+# colors are nice
+export backgrounds_default='\033[49m'
+export backgrounds_black='\033[40m'
+export backgrounds_red='\033[41m'
+export backgrounds_green='\033[42m'
+export backgrounds_yellow='\033[43m'
+export backgrounds_blue='\033[44m'
+export backgrounds_magenta='\033[45m'
+export backgrounds_cyan='\033[46m'
+export backgrounds_lightgray='\033[47m'
+export backgrounds_darkgray='\033[100m'
+export backgrounds_lightred='\033[101m'
+export backgrounds_lightgreen='\033[102m'
+export backgrounds_lightyellow='\033[103m'
+export backgrounds_lightblue='\033[104m'
+export backgrounds_lightmagenta='\033[105m'
+export backgrounds_lightcyan='\033[106m'
+export backgrounds_white='\033[107m'
+
+export colors_default='\033[39m'
+export colors_black='\033[30m'
+export colors_red='\033[31m'
+export colors_green='\033[32m'
+export colors_yellow='\033[33m'
+export colors_blue='\033[34m'
+export colors_magenta='\033[35m'
+export colors_cyan='\033[36m'
+export colors_lightgray='\033[37m'
+export colors_darkgray='\033[90m'
+export colors_lightred='\033[91m'
+export colors_lightgreen='\033[92m'
+export colors_lightyellow='\033[93m'
+export colors_lightblue='\033[94m'
+export colors_lightmagenta='\033[95m'
+export colors_lightcyan='\033[96m'
+export colors_white='\033[97m'

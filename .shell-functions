@@ -1,0 +1,54 @@
+# load our directory-specific environment files
+# when we change directories
+cd(){
+  builtin cd "$@" || return;
+  local cdir="$PWD"
+  # load custom shell-* files within this directory
+  load-env "$cdir"
+  # load custom shell-* in the centralized config location for this directory
+  load-env "$HOME/.config/shell-env$cdir"
+  return 0
+}
+
+filename-only() {
+    local without_extension=${1%.*}
+    echo "${without_extension##*/}" # strips path
+}
+
+# load any script on the indicated path and name a shell
+# function after it
+load-shell-script() {
+    eval "$(cat <<EOF
+    $(filename-only $1)() {
+        if [ -e "$1" ]; then
+            $1 \$@;
+        else
+            >&2 echo "$1 no longer exists; reloading environment..." && reload-env
+            return 1
+        fi
+    }
+EOF
+    )"
+}
+
+cache() {
+    # hash all arguments
+    local key="$@"
+
+    # hash last modified dates of any files
+    for arg in "$@"
+    do
+        if [ -f "$arg" ]; then
+            key+=$(date -r "$arg" +\ %s)
+        fi
+    done
+    test -d /tmp/command_cache || mkdir /tmp/command_cache
+    # use the hash as a name for temporary file
+    local file="/tmp/command_cache/$(echo -n "$key" | md5sum | cut -c -10)"
+    # use cached file or execute the command and cache it
+    if [ -f "$file" ]; then
+        cat "$file"
+    else
+        $@ | tee "$file"
+    fi
+}

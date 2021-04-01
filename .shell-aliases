@@ -1,0 +1,4 @@
+alias reload-env="source ${SHELL_ENV_DIRECTORY}/.bootstrap-env"
+alias ll="ls -l"
+alias la="ls -al"
+alias lh="ls -lh"
