@@ -25,7 +25,7 @@ load-env() {
   # load any others in unspecified order
   while IFS= read -r file
     do . "$1/$file"
-  done < <(grep -vE "aliases|env|functions|scripts" <(find . -name ".shell-*"))
+  done < <(grep -vE "aliases|env|functions|scripts" <(find . -maxdepth 1 -name ".shell-*"))
 }
 
 load-env "$SHELL_ENV_DIRECTORY"
